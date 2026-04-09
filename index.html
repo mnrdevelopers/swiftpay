@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Transfer money from your Credit Card or Digital Wallet directly to any bank account in India at just 1.5% service fee — powered by Razorpay." />
+  <title>SwiftPay – Credit Card to Bank Transfer | Lowest Fees in India</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Razorpay Checkout -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated Background Blobs -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" role="banner">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="10" fill="url(#logoGrad)"/>
+            <path d="M10 20L18 12L26 20L18 28L10 20Z" fill="white" fill-opacity="0.9"/>
+            <path d="M20 14L28 20L20 28" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#3B82F6"/>
+                <stop offset="1" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">Swift<span class="logo-accent">Pay</span></span>
+      </div>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="#transfer-section" class="nav-link" id="nav-transfer">Transfer</a>
+        <a href="#calculator-section" class="nav-link" id="nav-calc">Calculator</a>
+        <a href="#history-section" class="nav-link" id="nav-history">History</a>
+      </nav>
+
+      <div class="nav-actions">
+        <span class="badge-secure">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          256-bit SSL
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content" role="main">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section" id="hero-section" aria-label="Hero banner">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge" aria-label="Promotional badge">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Lowest Fee — Only 1.5% Service Charge
+          </div>
+          <h1 class="hero-title">
+            Credit Card<br/>
+            <span class="gradient-text">→ Bank Account</span><br/>
+            In Seconds.
+          </h1>
+          <p class="hero-subtitle">
+            Transfer funds from your credit card or digital wallet to any Indian bank account instantly via IMPS. Powered by Razorpay — India's most trusted gateway.
+          </p>
+          <div class="hero-stats" aria-label="Service statistics">
+            <div class="stat-item">
+              <span class="stat-value" id="stat-transfers">0</span>
+              <span class="stat-label">Transfers Done</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-item">
+              <span class="stat-value">1.5%</span>
+              <span class="stat-label">Service Fee</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-item">
+              <span class="stat-value">Instant</span>
+              <span class="stat-label">Settlement</span>
+            </div>
+          </div>
+          <div class="hero-cta">
+            <a href="#transfer-section" class="btn-primary" id="hero-cta-btn" role="button">
+              Start Transfer
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#calculator-section" class="btn-ghost" id="hero-calc-btn" role="button">Calculate Fee</a>
+          </div>
+        </div>
+
+        <div class="hero-card-demo" aria-label="Demo credit card illustration" role="img">
+          <div class="demo-card" id="demo-card">
+            <div class="card-chip" aria-hidden="true">
+              <div class="chip-inner"></div>
+            </div>
+            <div class="card-number" id="demo-card-number">•••• •••• •••• 4242</div>
+            <div class="card-footer">
+              <div class="card-detail">
+                <span class="card-detail-label">Card Holder</span>
+                <span class="card-detail-value" id="demo-card-name">YOUR NAME</span>
+              </div>
+              <div class="card-detail">
+                <span class="card-detail-label">Expires</span>
+                <span class="card-detail-value">12/27</span>
+              </div>
+              <div class="card-network" aria-hidden="true">
+                <div class="network-circle nc-1"></div>
+                <div class="network-circle nc-2"></div>
+              </div>
+            </div>
+          </div>
+          <div class="arrow-transfer" aria-hidden="true">
+            <svg viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12H54M44 4l10 8-10 8" stroke="url(#arrowGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="arrowGrad" x1="0" y1="12" x2="60" y2="12" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#3B82F6"/>
+                  <stop offset="1" stop-color="#06B6D4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="demo-bank" aria-label="Bank icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+              <rect width="64" height="64" rx="16" fill="url(#bankGrad)"/>
+              <rect x="12" y="28" width="6" height="18" rx="2" fill="white" fill-opacity="0.8"/>
+              <rect x="23" y="24" width="6" height="22" rx="2" fill="white" fill-opacity="0.8"/>
+              <rect x="34" y="26" width="6" height="20" rx="2" fill="white" fill-opacity="0.8"/>
+              <rect x="45" y="22" width="6" height="24" rx="2" fill="white" fill-opacity="0.8"/>
+              <rect x="10" y="48" width="43" height="4" rx="2" fill="white" fill-opacity="0.6"/>
+              <path d="M32 10L10 20h44L32 10z" fill="white" fill-opacity="0.9"/>
+              <defs>
+                <linearGradient id="bankGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#1E40AF"/>
+                  <stop offset="1" stop-color="#0E7490"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>Bank A/C</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fee Comparison Banner -->
+      <div class="fee-banner" aria-label="Fee comparison">
+        <div class="fee-banner-inner">
+          <div class="fee-item our-fee">
+            <span class="fee-label">SwiftPay</span>
+            <span class="fee-pct">1.5%</span>
+          </div>
+          <div class="fee-vs" aria-hidden="true">vs</div>
+          <div class="fee-item other-fees">
+            <div class="fee-compare-row">
+              <span class="fee-brand">Cred</span><span class="fee-pct other">2.5%</span>
+            </div>
+            <div class="fee-compare-row">
+              <span class="fee-brand">IndusInd</span><span class="fee-pct other">3%</span>
+            </div>
+            <div class="fee-compare-row">
+              <span class="fee-brand">HDFC</span><span class="fee-pct other">3.5%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRANSFER WIZARD ===== -->
+    <section class="transfer-section" id="transfer-section" aria-label="Transfer form">
+      <div class="section-header">
+        <h2 class="section-title">Start Your Transfer</h2>
+        <p class="section-subtitle">Complete 4 simple steps to send money instantly</p>
+      </div>
+
+      <!-- Step Progress -->
+      <div class="step-progress" role="progressbar" aria-label="Transfer steps" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" id="step-progress">
+        <div class="step-item active" id="step-dot-1" data-step="1">
+          <div class="step-dot"><span>1</span></div>
+          <div class="step-label">Source</div>
+        </div>
+        <div class="step-connector" aria-hidden="true"></div>
+        <div class="step-item" id="step-dot-2" data-step="2">
+          <div class="step-dot"><span>2</span></div>
+          <div class="step-label">Destination</div>
+        </div>
+        <div class="step-connector" aria-hidden="true"></div>
+        <div class="step-item" id="step-dot-3" data-step="3">
+          <div class="step-dot"><span>3</span></div>
+          <div class="step-label">Amount</div>
+        </div>
+        <div class="step-connector" aria-hidden="true"></div>
+        <div class="step-item" id="step-dot-4" data-step="4">
+          <div class="step-dot"><span>4</span></div>
+          <div class="step-label">Confirm</div>
+        </div>
+      </div>
+
+      <div class="wizard-container">
+
+        <!-- STEP 1: Source -->
+        <div class="wizard-step active" id="wizard-step-1" role="group" aria-label="Step 1: Choose source">
+          <h3 class="step-heading">Choose Your Payment Source</h3>
+          <p class="step-desc">Select how you want to fund this transfer</p>
+
+          <div class="source-grid" role="radiogroup" aria-label="Payment source selection">
+            <label class="source-card selected" for="src-credit" id="src-credit-label">
+              <input type="radio" name="source" id="src-credit" value="credit_card" checked />
+              <div class="source-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 32" fill="none"><rect width="48" height="32" rx="6" fill="url(#cc1)"/><rect x="0" y="8" width="48" height="8" fill="black" fill-opacity="0.3"/><rect x="6" y="20" width="20" height="4" rx="2" fill="white" fill-opacity="0.6"/><defs><linearGradient id="cc1" x1="0" y1="0" x2="48" y2="32"><stop stop-color="#3B82F6"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg>
+              </div>
+              <span class="source-name">Credit Card</span>
+              <span class="source-sub">Visa / Mastercard / RuPay</span>
+              <div class="selected-check" aria-hidden="true">✓</div>
+            </label>
+
+            <label class="source-card" for="src-debit" id="src-debit-label">
+              <input type="radio" name="source" id="src-debit" value="debit_card" />
+              <div class="source-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 32" fill="none"><rect width="48" height="32" rx="6" fill="url(#cc2)"/><rect x="0" y="8" width="48" height="8" fill="black" fill-opacity="0.3"/><rect x="6" y="20" width="20" height="4" rx="2" fill="white" fill-opacity="0.6"/><defs><linearGradient id="cc2" x1="0" y1="0" x2="48" y2="32"><stop stop-color="#059669"/><stop offset="1" stop-color="#0891B2"/></linearGradient></defs></svg>
+              </div>
+              <span class="source-name">Debit Card</span>
+              <span class="source-sub">All major banks</span>
+              <div class="selected-check" aria-hidden="true">✓</div>
+            </label>
+
+            <label class="source-card" for="src-wallet" id="src-wallet-label">
+              <input type="radio" name="source" id="src-wallet" value="wallet" />
+              <div class="source-icon wallet-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="url(#w1)"/><rect x="8" y="16" width="32" height="22" rx="4" stroke="white" stroke-width="2" fill="none"/><circle cx="32" cy="27" r="4" fill="white" fill-opacity="0.9"/><rect x="8" y="14" width="20" height="4" rx="2" fill="white" fill-opacity="0.6"/><defs><linearGradient id="w1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#F59E0B"/><stop offset="1" stop-color="#EF4444"/></linearGradient></defs></svg>
+              </div>
+              <span class="source-name">Digital Wallet</span>
+              <span class="source-sub">Paytm / PhonePe / MobiKwik</span>
+              <div class="selected-check" aria-hidden="true">✓</div>
+            </label>
+
+            <label class="source-card" for="src-netbanking" id="src-netbanking-label">
+              <input type="radio" name="source" id="src-netbanking" value="netbanking" />
+              <div class="source-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="url(#nb1)"/><rect x="10" y="28" width="5" height="12" rx="1" fill="white" fill-opacity="0.8"/><rect x="18" y="24" width="5" height="16" rx="1" fill="white" fill-opacity="0.8"/><rect x="26" y="26" width="5" height="14" rx="1" fill="white" fill-opacity="0.8"/><rect x="34" y="22" width="5" height="18" rx="1" fill="white" fill-opacity="0.8"/><path d="M24 8L10 16h28L24 8z" fill="white" fill-opacity="0.9"/><defs><linearGradient id="nb1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#1E40AF"/><stop offset="1" stop-color="#0E7490"/></linearGradient></defs></svg>
+              </div>
+              <span class="source-name">Net Banking</span>
+              <span class="source-sub">50+ banks supported</span>
+              <div class="selected-check" aria-hidden="true">✓</div>
+            </label>
+          </div>
+
+          <button class="btn-primary step-next" id="step1-next" onclick="goToStep(2)">
+            Continue
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- STEP 2: Destination -->
+        <div class="wizard-step" id="wizard-step-2" role="group" aria-label="Step 2: Enter destination">
+          <h3 class="step-heading">Enter Recipient's Bank Details</h3>
+          <p class="step-desc">We verify your beneficiary for secure transfers</p>
+
+          <div class="dest-tabs" role="tablist" aria-label="Destination type">
+            <button class="dest-tab active" id="tab-bank" role="tab" aria-selected="true" aria-controls="panel-bank" onclick="switchDestTab('bank')">
+              🏦 Bank Account
+            </button>
+            <button class="dest-tab" id="tab-upi" role="tab" aria-selected="false" aria-controls="panel-upi" onclick="switchDestTab('upi')">
+              ⚡ UPI ID
+            </button>
+          </div>
+
+          <!-- Bank Account Panel -->
+          <div class="dest-panel active" id="panel-bank" role="tabpanel" aria-labelledby="tab-bank">
+            <div class="form-group">
+              <label for="beneficiary-name" class="form-label">Beneficiary Name</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text" id="beneficiary-name" class="form-input" placeholder="Full name as per bank" autocomplete="name" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="account-number" class="form-label">Account Number</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                <input type="text" id="account-number" class="form-input" placeholder="Enter account number" autocomplete="off" inputmode="numeric" maxlength="18" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-account" class="form-label">Confirm Account Number</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <input type="text" id="confirm-account" class="form-input" placeholder="Re-enter account number" autocomplete="off" inputmode="numeric" maxlength="18" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="ifsc-code" class="form-label">IFSC Code</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                <input type="text" id="ifsc-code" class="form-input ifsc-input" placeholder="e.g. SBIN0000123" autocomplete="off" maxlength="11" style="text-transform:uppercase" />
+                <button class="btn-verify" id="ifsc-verify-btn" onclick="verifyIFSC()" aria-label="Verify IFSC code">Verify</button>
+              </div>
+              <div class="ifsc-result" id="ifsc-result" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- UPI Panel -->
+          <div class="dest-panel" id="panel-upi" role="tabpanel" aria-labelledby="tab-upi">
+            <div class="form-group">
+              <label for="upi-id" class="form-label">UPI ID</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <input type="text" id="upi-id" class="form-input" placeholder="yourname@upi" autocomplete="off" aria-describedby="upi-hint" />
+                <button class="btn-verify" id="upi-verify-btn" onclick="verifyUPI()" aria-label="Verify UPI ID">Verify</button>
+              </div>
+              <div class="form-hint" id="upi-hint">Supported: @paytm, @ybl, @okaxis, @oksbi, @ibl</div>
+              <div class="ifsc-result" id="upi-result" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="step-nav">
+            <button class="btn-ghost step-back" onclick="goToStep(1)" id="step2-back" aria-label="Go back to step 1">← Back</button>
+            <button class="btn-primary" onclick="validateStep2()" id="step2-next" aria-label="Continue to amount">
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Amount -->
+        <div class="wizard-step" id="wizard-step-3" role="group" aria-label="Step 3: Enter amount">
+          <h3 class="step-heading">Enter Transfer Amount</h3>
+          <p class="step-desc">Minimum ₹500 — Maximum ₹5,00,000 per transaction</p>
+
+          <div class="amount-input-group">
+            <div class="currency-symbol" aria-hidden="true">₹</div>
+            <input type="number" id="transfer-amount" class="amount-input" placeholder="0" min="500" max="500000" step="100"
+              aria-label="Transfer amount in rupees" oninput="updateFeeBreakdown()" />
+          </div>
+
+          <div class="quick-amounts" role="group" aria-label="Quick amount selection">
+            <button class="quick-amt" onclick="setAmount(5000)" id="qa-5k">₹5,000</button>
+            <button class="quick-amt" onclick="setAmount(10000)" id="qa-10k">₹10,000</button>
+            <button class="quick-amt" onclick="setAmount(25000)" id="qa-25k">₹25,000</button>
+            <button class="quick-amt" onclick="setAmount(50000)" id="qa-50k">₹50,000</button>
+          </div>
+
+          <!-- Fee Breakdown Card -->
+          <div class="fee-breakdown" id="fee-breakdown" aria-live="polite">
+            <div class="fee-row">
+              <span class="fee-key">Transfer Amount</span>
+              <span class="fee-val" id="fb-amount">₹0</span>
+            </div>
+            <div class="fee-row">
+              <span class="fee-key">Service Fee <small>(1.5%)</small></span>
+              <span class="fee-val fee-highlight" id="fb-fee">₹0</span>
+            </div>
+            <div class="fee-row">
+              <span class="fee-key">GST on Fee <small>(18%)</small></span>
+              <span class="fee-val" id="fb-gst">₹0</span>
+            </div>
+            <div class="fee-row fee-total">
+              <span class="fee-key">You Pay</span>
+              <span class="fee-val you-pay" id="fb-total">₹0</span>
+            </div>
+            <div class="fee-row">
+              <span class="fee-key">Recipient Gets</span>
+              <span class="fee-val recipient-gets" id="fb-recipient">₹0</span>
+            </div>
+            <div class="fee-row settlement-row">
+              <span class="fee-key">Settlement Mode</span>
+              <span class="fee-val" id="fb-mode">IMPS (Instant)</span>
+            </div>
+          </div>
+
+          <div class="step-nav">
+            <button class="btn-ghost step-back" onclick="goToStep(2)" id="step3-back" aria-label="Go back to step 2">← Back</button>
+            <button class="btn-primary" onclick="validateStep3()" id="step3-next" aria-label="Continue to confirmation">
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Confirm & Pay -->
+        <div class="wizard-step" id="wizard-step-4" role="group" aria-label="Step 4: Confirm and pay">
+          <h3 class="step-heading">Review & Confirm</h3>
+          <p class="step-desc">Please verify all details before proceeding to pay</p>
+
+          <div class="review-card" id="review-card" aria-label="Transfer summary">
+            <div class="review-section">
+              <div class="review-label">SOURCE</div>
+              <div class="review-value" id="rv-source">Credit Card</div>
+            </div>
+            <div class="review-divider" aria-hidden="true"></div>
+            <div class="review-section">
+              <div class="review-label">TO</div>
+              <div class="review-value" id="rv-to">—</div>
+              <div class="review-sub" id="rv-to-sub">—</div>
+            </div>
+            <div class="review-divider" aria-hidden="true"></div>
+            <div class="review-section">
+              <div class="review-label">AMOUNT BREAKDOWN</div>
+              <div class="review-breakdown">
+                <div class="rb-row"><span>Transfer Amount</span><span id="rv-amount">₹0</span></div>
+                <div class="rb-row"><span>Service Fee (1.5%)</span><span id="rv-fee">₹0</span></div>
+                <div class="rb-row"><span>GST (18% on fee)</span><span id="rv-gst">₹0</span></div>
+                <div class="rb-row rb-total"><span>Total Charged</span><span id="rv-total">₹0</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="terms-check">
+            <label class="checkbox-label" for="terms-checkbox">
+              <input type="checkbox" id="terms-checkbox" />
+              <span class="checkmark" aria-hidden="true"></span>
+              I agree to the <a href="#" class="terms-link" id="terms-link">Terms &amp; Conditions</a> and confirm the above details are correct.
+            </label>
+          </div>
+
+          <div class="step-nav">
+            <button class="btn-ghost step-back" onclick="goToStep(3)" id="step4-back" aria-label="Go back to step 3">← Back</button>
+            <button class="btn-pay" onclick="initiatePayment()" id="pay-btn" aria-label="Pay and transfer now">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Pay &amp; Transfer Now
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Success Modal -->
+      <div class="modal-overlay" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+        <div class="modal-card">
+          <div class="success-animation" aria-hidden="true">
+            <div class="success-ring"></div>
+            <svg class="success-check" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="#10B981" stroke-width="2"/><path d="M14 27l8 8 16-16" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h2 id="modal-title" class="modal-title">Transfer Initiated! 🎉</h2>
+          <p class="modal-desc" id="modal-desc">Your transfer is being processed via IMPS. Funds will be credited within a few minutes.</p>
+          <div class="modal-txn" id="modal-txn"></div>
+          <button class="btn-primary" onclick="closeModal()" id="modal-close" aria-label="Close and view history">View History</button>
+          <button class="btn-ghost" onclick="resetWizard()" id="modal-new" aria-label="Start a new transfer">New Transfer</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===== FEE CALCULATOR ===== -->
+    <section class="calculator-section" id="calculator-section" aria-label="Fee calculator">
+      <div class="section-header">
+        <h2 class="section-title">Fee Calculator</h2>
+        <p class="section-subtitle">See exactly how much you'll save vs. competitors</p>
+      </div>
+
+      <div class="calc-container">
+        <div class="calc-card">
+          <label for="calc-slider" class="calc-slider-label">Transfer Amount: <strong id="calc-amount-display">₹10,000</strong></label>
+          <input type="range" id="calc-slider" class="calc-slider" min="500" max="500000" step="500" value="10000"
+            aria-label="Adjust transfer amount" oninput="updateCalculator(this.value)" />
+          <div class="calc-range-labels" aria-hidden="true">
+            <span>₹500</span><span>₹5L</span>
+          </div>
+
+          <div class="calc-comparison" aria-label="Fee comparison between providers">
+            <div class="comp-header">
+              <span>Provider</span><span>Fee</span><span>You Pay</span><span>Recipient Gets</span>
+            </div>
+            <div class="comp-row best" id="comp-swiftpay" aria-label="SwiftPay comparison row">
+              <span class="comp-name">
+                <span class="comp-badge">BEST</span> SwiftPay
+              </span>
+              <span class="comp-fee" id="cc-swiftpay-fee">1.5%</span>
+              <span class="comp-total" id="cc-swiftpay-total">₹10,177</span>
+              <span class="comp-recv" id="cc-swiftpay-recv">₹10,000</span>
+            </div>
+            <div class="comp-row" id="comp-cred" aria-label="Cred comparison row">
+              <span class="comp-name">Cred</span>
+              <span class="comp-fee">2.5%</span>
+              <span class="comp-total" id="cc-cred-total">₹10,295</span>
+              <span class="comp-recv" id="cc-cred-recv">₹10,000</span>
+            </div>
+            <div class="comp-row" id="comp-indus" aria-label="IndusInd comparison row">
+              <span class="comp-name">IndusInd</span>
+              <span class="comp-fee">3%</span>
+              <span class="comp-total" id="cc-indus-total">₹10,354</span>
+              <span class="comp-recv" id="cc-indus-recv">₹10,000</span>
+            </div>
+            <div class="comp-row" id="comp-hdfc" aria-label="HDFC comparison row">
+              <span class="comp-name">HDFC</span>
+              <span class="comp-fee">3.5%</span>
+              <span class="comp-total" id="cc-hdfc-total">₹10,413</span>
+              <span class="comp-recv" id="cc-hdfc-recv">₹10,000</span>
+            </div>
+          </div>
+
+          <div class="savings-banner" id="savings-banner" aria-live="polite">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            You save <strong id="savings-amount">₹236</strong> vs HDFC and <strong id="savings-vs-cred">₹118</strong> vs Cred!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRANSACTION HISTORY ===== -->
+    <section class="history-section" id="history-section" aria-label="Transaction history">
+      <div class="section-header">
+        <h2 class="section-title">Transaction History</h2>
+        <p class="section-subtitle">All your past transfers at a glance</p>
+      </div>
+
+      <div class="history-container">
+        <div class="history-toolbar">
+          <input type="search" id="history-search" class="history-search" placeholder="Search by name or transaction ID…" aria-label="Search transactions" oninput="filterHistory(this.value)" />
+          <button class="btn-ghost btn-sm" onclick="exportHistory()" id="export-history-btn" aria-label="Export transaction history">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export
+          </button>
+          <button class="btn-ghost btn-sm btn-danger" onclick="clearHistory()" id="clear-history-btn" aria-label="Clear transaction history">Clear All</button>
+        </div>
+
+        <div class="history-table-wrapper" role="region" aria-label="Transactions table">
+          <table class="history-table" id="history-table" aria-label="Transaction history">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Recipient</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Fee</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-tbody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+          <div class="history-empty" id="history-empty" aria-live="polite">
+            <div class="empty-icon" aria-hidden="true">📋</div>
+            <p>No transactions yet. Make your first transfer above!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-section" id="how-section" aria-label="How it works">
+      <div class="section-header">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Simple, secure and instant</p>
+      </div>
+      <div class="how-grid" role="list">
+        <div class="how-card" role="listitem" id="how-card-1">
+          <div class="how-number" aria-hidden="true">01</div>
+          <div class="how-icon" aria-hidden="true">💳</div>
+          <h3 class="how-title">Enter Your Card</h3>
+          <p class="how-desc">Securely enter your credit/debit card details. All data encrypted via Razorpay's PCI-DSS compliant checkout.</p>
+        </div>
+        <div class="how-card" role="listitem" id="how-card-2">
+          <div class="how-number" aria-hidden="true">02</div>
+          <div class="how-icon" aria-hidden="true">🏦</div>
+          <h3 class="how-title">Add Beneficiary</h3>
+          <p class="how-desc">Enter the recipient's bank account number and IFSC code. We auto-verify the bank via Razorpay's IFSC API.</p>
+        </div>
+        <div class="how-card" role="listitem" id="how-card-3">
+          <div class="how-number" aria-hidden="true">03</div>
+          <div class="how-icon" aria-hidden="true">💸</div>
+          <h3 class="how-title">Pay &amp; Transfer</h3>
+          <p class="how-desc">Confirm the amount, review fees, and pay. We charge your card and instantly initiate IMPS to the recipient's account.</p>
+        </div>
+        <div class="how-card" role="listitem" id="how-card-4">
+          <div class="how-number" aria-hidden="true">04</div>
+          <div class="how-icon" aria-hidden="true">✅</div>
+          <h3 class="how-title">Money Received</h3>
+          <p class="how-desc">Recipient gets funds in their bank account within minutes. You receive a transfer receipt by email.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#logoGrad2)"/><path d="M10 20L18 12L26 20L18 28L10 20Z" fill="white" fill-opacity="0.9"/><path d="M20 14L28 20L20 28" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><defs><linearGradient id="logoGrad2" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#3B82F6"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs></svg>
+          </div>
+          <span class="logo-text">Swift<span class="logo-accent">Pay</span></span>
+        </div>
+        <p class="footer-tagline">The smartest way to transfer credit card funds to bank accounts in India.</p>
+      </div>
+      <div class="footer-info">
+        <p>⚠️ <strong>Demo Mode:</strong> This app uses Razorpay test credentials. No real money is transferred.</p>
+        <p>Powered by <strong>Razorpay</strong> • IMPS / NEFT / UPI settlement</p>
+        <p class="footer-legal">© 2026 SwiftPay. Built for demonstration purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="calculator.js"></script>
+  <script src="history.js"></script>
+  <script src="razorpay.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

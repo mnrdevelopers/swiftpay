@@ -1,0 +1,8 @@
+{
+  "name": "swiftpay",
+  "version": "1.0.0",
+  "description": "SwiftPay – Credit Card to Bank Transfer powered by Razorpay",
+  "dependencies": {
+    "razorpay": "^2.9.2"
+  }
+}
